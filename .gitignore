@@ -1,0 +1,7 @@
+yarn.lock
+node_modules
+node_modules
+data
+.env
+.env.test
+instruções.txt
