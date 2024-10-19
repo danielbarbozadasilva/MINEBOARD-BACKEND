@@ -1,10 +1,23 @@
-const multer = require('multer')
+const multer = require('multer');
+const AWS = require('aws-sdk');
+const path = require('path');
+const fs = require('fs-sync');
 
 const storage = multer.diskStorage({
-  destination: (req, file, callback) =>
-    callback(null, `${__dirname}/../utils/file/image`),
-  filename: (req, file, callback) =>
-    callback(null, `${file.fieldname}-${Date.now()}.jpg`)
+  destination: (req, file, callback) => {
+    callback(null, `${__dirname}/uploads`);
+  },
+  filename: (req, file, callback) => {
+    callback(null, file.originalname);
+  }
+});
+
+const upload = multer({ storage, limits: { fileSize: 1024 * 1024 * 1024 }});
+
+const s3 = new AWS.S3({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: process.env.AWS_BUCKET_REGION
 })
 
 function getAllFilesInFolder(folderPath, toIgnore) {
@@ -28,9 +41,4 @@ function getAllFilesInFolder(folderPath, toIgnore) {
   return files;
 }
 
-const upload = multer({ storage })
-
-module.exports = {
-  upload,
-  getAllFilesInFolder
-}
+module.exports = { upload, s3, getAllFilesInFolder }
