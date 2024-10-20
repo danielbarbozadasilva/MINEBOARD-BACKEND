@@ -1,8 +1,6 @@
-const { UploadModPackUseCase } = require('./UploadModPackUseCase');
-
 class UploadModPackController {
   constructor(uploadModPackUseCase) {
-    this.uploadModPackUseCase = UploadModPackUseCase;
+    this.uploadModPackUseCase = uploadModPackUseCase;
   }
 
   async handle(req, res) {
@@ -14,7 +12,6 @@ class UploadModPackController {
       }
 
       const zipFilePath = req.file.path;
-      
       const result = await this.uploadModPackUseCase.execute(zipFilePath);
 
       return res.status(200).send({ message: 'Sucesso!', data: result });
