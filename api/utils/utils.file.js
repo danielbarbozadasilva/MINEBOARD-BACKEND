@@ -1,7 +1,7 @@
 const multer = require('multer');
 const AWS = require('aws-sdk');
 const path = require('path');
-const fs = require('fs-sync');
+const fs = require('fs');
 
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {

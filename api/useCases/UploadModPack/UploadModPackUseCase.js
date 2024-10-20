@@ -5,7 +5,7 @@ class UploadModPackUseCase {
 
   async execute(path) {
     if (!path) {
-      throw new Error("O caminho do arquivo não pode ser vazio.");
+      throw new Error('O caminho do arquivo não pode ser vazio.');
     }
     return await this.s3.saveFile(path);
   }

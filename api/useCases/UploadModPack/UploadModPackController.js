@@ -12,9 +12,9 @@ class UploadModPackController {
       }
 
       const zipFilePath = req.file.path;
-      const result = await this.uploadModPackUseCase.execute(zipFilePath);
+      const resultJson = await this.uploadModPackUseCase.execute(zipFilePath);
 
-      return res.status(200).send({ message: 'Sucesso!', data: result });
+      return res.status(200).send({ message: 'Sucesso!', data: resultJson });
     } catch (error) {
       return res
         .status(400)

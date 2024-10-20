@@ -76,6 +76,7 @@ class S3Storage {
           fs.unlink(filepath, (err) => {
             if (err) console.error('Erro ao deletar o arquivo zipado:', err);
           });
+          
           console.log(listaArquivos);
           
           // TODO: NÃO RETORNA A LISTA
